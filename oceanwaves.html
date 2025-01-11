@@ -68,7 +68,7 @@
 
     </div>
       <div class="col-xl-6">
-                <figure> <img class="img-fluid" src="images/SpectrumPreview.png">
+        <figure> <img class="img-fluid" src="images/SpectrumPreview.png">
           <figcaption class="text-light">Wave frequency spectrum texture.</figcaption>
         </figure>
       </div>
@@ -86,7 +86,7 @@
     <div class="col-xl-6">
 		<figure>
 			<video muted autoplay loop class="embed-responsive"><source src="videos/FourierComponentsPreview.mp4"></video>
-			<figcaption class="text-light">Fourier components texture.</figcaption>
+			<figcaption class="text-light">Fourier components texture animating through time.</figcaption>
 		</figure>
       
     </div>
@@ -98,10 +98,15 @@
         		  <p class="text-justify">Finally, we run each fourier components texture through a 2D inverse FFT algorithm on the GPU to generate the X, Y, and Z displacements along with derivative maps to be used as fragment normals. I implemented the inverse FFT using a compute shader version of the Cooley-Tukey FFT algorithm as described by Fynn-Jorin Flügge in their thesis paper. This involves precomputing a "butterfly texture" that contains the "twiddle factors" for each stage of the divide and conquer algorithm, which is then used to compute the inverse FFT for a horizontal and vertical pass on the components texture. I'm not going to pretend like I know exactly how it all works, I honestly consider it to be real life magic because the result of the inverse FFT is a highly detailed displacement and slope map of the ocean that tiles seamlessly, animates realistically, and runs smoothly. Profiling it on my machine, it takes about 5ms each frame, and I know theres probably a lot of ways I could optimize it further.
 		  </p>
       </div>
-      <div class="col-xl-3"></div>
+      <div class="col-xl-3">
+		  <figure> <img class="img-fluid" src="images/ButterfyPreview.png">
+          <figcaption class="text-light">Butterfly texture.</figcaption>
+        </figure>
+	</div>
     </div>
     <div class="row">
-      <div class="col-xl-3"></div>
+      <div class="col-xl-3">
+		</div>
       <div class="col-xl-6">
         <figure>
           <video muted autoplay loop class="embed-responsive">
