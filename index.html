@@ -1,103 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My Portfolio</title>
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>My Portfolio</title>
     <!-- Bootstrap -->
-  <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
-  <link href="style.css" rel="stylesheet" type="text/css">
-  </head>
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
 <body style="background: #26242F">
 <div class="container-fluid">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span></button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active"> <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a></li>
-        <li class="nav-item"> <a class="nav-link" href="https://itch.io/profile/carrotcakevr">Itch.io</a></li>
-        <li class="nav-item"> <a class="nav-link" href="https://github.com/FeveredCarrot">Github</a></li>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                data-target="#navbarSupportedContent1" data-toggle="collapse" type="button"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="https://itch.io/profile/carrotcakevr">Itch.io</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/FeveredCarrot">Github</a></li>
 
-        <li class="nav-item"> <a class="nav-link" href="mailto:jaspermclean10@gmail.com">Contact</a></li>
-        <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Projects&nbsp; </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown1"> <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a></div>
-        </li>
-        <li class="nav-item"> <a class="nav-link disabled" href="#">Disabled</a></li>
-      </ul>
+                <li class="nav-item"><a class="nav-link" href="mailto:jaspermclean10@gmail.com">Contact</a></li>
+                <li class="nav-item dropdown"><a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+                                                 data-toggle="dropdown" href="#" id="navbarDropdown1"
+                                                 role="button"> Projects&nbsp; </a>
+                    <div aria-labelledby="navbarDropdown1" class="dropdown-menu"><a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a></div>
+                </li>
+                <li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container container-main">
+        <h1 class="title display-4 text-center">Jasper McLean</h1>
+        <p class="lead text-center">Software engineering student and 3D generalist</p>
+        <h2>Projects</h2>
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card card-image">
+                    <video autoplay class="card-img-top" loop muted>
+                        <source src="videos/WavesPreview.mp4">
+                    </video>
+                    <div class="card-body">
+                        <h5 class="card-title">Ocean Wave Simulation</h5>
+                        <p class="card-text">Fast Fourier Transform implemented in compute shaders</p>
+                        <a class="btn btn-primary" href="oceanwaves.html">Read More</a></div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card card-image">
+                    <video autoplay class="card-img-top" loop muted>
+                        <source src="videos/PetriPreview.mp4">
+                    </video>
+                    <div class="card-body">
+                        <h5 class="card-title">Petri Dish</h5>
+                        <p class="card-text">Cellular automation written in HLSL</p>
+                        <a class="btn btn-primary" href="#">Read More</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card card-image">
+                    <video autoplay class="card-img-top" loop muted>
+                        <source src="videos/DoorPreview.mp4">
+                    </video>
+                    <div class="card-body">
+                        <h5 class="card-title">Blank Canvas</h5>
+                        <p class="card-text">Puzzle game made for Brackeys Game Jam 2024</p>
+                        <a class="btn btn-primary" href="#">Read More</a></div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card card-image">
+                    <video autoplay class="card-img-top" loop muted>
+                        <source src="videos/FlightSimPreview.mp4">
+                    </video>
+                    <div class="card-body">
+                        <h5 class="card-title">Flight Simulator</h5>
+                        <p>Networked multiplayer combat flight simulator&nbsp;&nbsp;</p>
+                        <a class="btn btn-primary" href="#">Read More</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card card-image">
+                    <video autoplay class="card-img-top" loop muted>
+                        <source src="videos/ftmPreview.mp4">
+                    </video>
+                    <div class="card-body">
+                        <h5 class="card-title">Feed The Machine</h5>
+                        <p class="card-text">Made in 4 days for GMTK Game Jam 2024</p>
+                        <a class="btn btn-primary" href="#">Read More</a></div>
+                </div>
+            </div>
+        </div>
     </div>
-  </nav>
-  <div class="container container-main">
-    <h1 class="title display-4 text-center">Jasper McLean</h1>
-    <p class="lead text-center">Software engineering student and 3D generalist</p>
-    <h2>Projects</h2>
-<div class="row">
-  <div class="col-xl-6">
-    <div class="card card-image">
-      <video muted autoplay loop class="card-img-top">
-        <source src="videos/WavesPreview.mp4">
-      </video>
-      <div class="card-body">
-        <h5 class="card-title">Ocean Wave Simulation</h5>
-        <p class="card-text">Fast Fourier Transform implemented in compute shaders</p>
-        <a href="oceanwaves.html" class="btn btn-primary">Read More</a></div>
-    </div>
-  </div>
-  <div class="col-xl-6">
-    <div class="card card-image">
-      <video muted autoplay loop class="card-img-top">
-        <source src="videos/PetriPreview.mp4">
-      </video>
-      <div class="card-body">
-        <h5 class="card-title">Petri Dish</h5>
-        <p class="card-text">Cellular automation written in HLSL</p>
-        <a href="#" class="btn btn-primary">Read More</a></div>
-    </div>
-  </div>
+
 </div>
-<div class="row">
-<div class="col-xl-6">
-  <div class="card card-image">
-    <video muted autoplay loop class="card-img-top">
-      <source src="videos/DoorPreview.mp4">
-    </video>
-    <div class="card-body">
-      <h5 class="card-title">Blank Canvas</h5>
-      <p class="card-text">Puzzle game made for Brackeys Game Jam 2024</p>
-      <a href="#" class="btn btn-primary">Read More</a></div>
-  </div>
-</div>
-<div class="col-xl-6">
-  <div class="card card-image">
-      <video muted autoplay loop class="card-img-top">
-        <source src="videos/FlightSimPreview.mp4">
-      </video>
-      <div class="card-body">
-        <h5 class="card-title">Flight Simulator</h5>
-        <p>Networked multiplayer combat flight simulator&nbsp;&nbsp;</p>
-        <a href="#" class="btn btn-primary">Read More</a></div>
-    </div>
-</div>
-</div>
-<div class="row">
-  <div class="col-xl-6">
-    <div class="card card-image">
-      <video muted autoplay loop class="card-img-top">
-        <source src="videos/ftmPreview.mp4">
-      </video>
-      <div class="card-body">
-        <h5 class="card-title">Feed The Machine</h5>
-        <p class="card-text">Made in 4 days for GMTK Game Jam 2024</p>
-        <a href="#" class="btn btn-primary">Read More</a></div>
-    </div>
-  </div>
-</div>
-</div>
-	
-</div>
-	<footer class="footer-pad"></footer>
+<footer class="footer-pad"></footer>
 <script src="js/jquery-3.4.1.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap-4.4.1.js"></script>
