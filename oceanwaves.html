@@ -50,9 +50,9 @@
             <div class="col"></div>
             <div class="blog-center-col">
                 <p class="blog-text">In late 2023, I began working on a personal game project based around traversing
-                    the ocean. Since the ocean simulation was going to be a main focus of the game, it needed to be both
+                    the ocean. Since the ocean simulation was a main focus of the game, it needed to be both
                     flexible enough to dynamically control the ocean state and detailed enough to represent a wide
-                    variety of weather conditions - all while being performant enough to run in real-time. Although I
+                    variety of weather conditions - all while running in real-time. Although I
                     never finished the rest of the game, I consider the ocean simulation itself to be my proudest
                     achievement as a programmer.</p>
             </div>
@@ -109,7 +109,7 @@
                     result is a texture where wave frequency is represented as the distance from the center, wave
                     direction is the direction from the center, and a complex amplitude is stored in the red and green
                     channels of each pixel. The red and green channels are also multiplied by random gaussian
-                    distributed noise to create a natural distribution of wave phase and amplitude. There's also another
+                    distributed noise to create a natural distribution of wave phase and amplitude. There's another
                     step that involves generating an additional complex conjugate version of the frequency spectrum, but
                     I won't get too much into that.</p>
             </div>
@@ -125,9 +125,9 @@
             <div class="blog-double-column ">
                 <p class="blog-text">After generating the frequency domain of the initial ocean state, we advance the
                     frequencies forward in time by using Euler's formula (and some other math) to rotate each pixel
-                    around the complex plane. The resulting fourier components texture can be run through an inverse FFT
+                    around the complex plane. The resulting Fourier components texture can be run through an inverse FFT
                     (IFFT) to become the heightmap of the ocean at the specified time, but before we do that, we can
-                    derive additional fourier components textures for the horizontal displacements of the Gerstner waves
+                    derive additional Fourier components textures for the horizontal displacements of the Gerstner waves
                     and for the slope on each axis (for normal mapping) using a few complex multiplications.</p>
             </div>
             <div class="blog-double-column align-content-center">
@@ -149,8 +149,9 @@
                     Cooley-Tukey FFT algorithm as described by Fynn-Jorin Flügge in his <a
                             href="https://doi.org/10.15480/882.1436">thesis paper.</a> This involves
                     pre-computing a "butterfly texture" that contains the "twiddle factors" for each stage of the divide
-                    and conquer algorithm. The butterfly texture is then used in another compute shader for a horizontal
-                    and vertical IFFT pass on the fourier components texture.
+                    and conquer algorithm. The butterfly texture is then used in another compute shader for the
+                    horizontal
+                    and vertical IFFT pass on the fourier components textures.
                 </p>
             </div>
 
@@ -189,8 +190,10 @@
                 <p class="blog-text">Even after spending weeks on this project, I still haven't fully wrapped my head
                     around how the entire thing works; I honestly consider it to be as close as you can get to real
                     magic because the result of the IFFT is a highly detailed displacement and slope map of the ocean
-                    that tiles seamlessly, animates realistically, and runs fast. Profiling it on my machine, it takes
-                    about 5ms each frame, and I know there's probably a lot of ways I could optimize it further.
+                    that animates realistically and tiles seamlessly. Profiling it on my machine, the compute shaders
+                    take
+                    about 5ms total each frame, and I know with my sloppy implementation there's surely room to optimize
+                    it further.
                 </p>
             </div>
             <div class="col"></div>
