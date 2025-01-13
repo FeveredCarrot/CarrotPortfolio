@@ -24,13 +24,18 @@ $primary-text-emphasis-dark: lighten($primary, 35%);
   @extend .col-xl-4;
 }
 
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
 .blog-text {
+  font-family: var(--bs-body-font-family), sans-serif;
+  font-weight: var(--bs-body-font-weight);
+  line-height: var(--bs-body-line-height);
+  color: var(--bs-body-color);
   text-align: justify;
   font-size: 16pt;
   //font: 16pt Calibri, sans-serif;
 }
-
-@import "../node_modules/bootstrap/scss/bootstrap";
 
 .container-fluid {
   padding-left: 0;
@@ -57,5 +62,11 @@ $primary-text-emphasis-dark: lighten($primary, 35%);
   .card-body {
     --bs-card-bg: var(--bs-tertiary-bg);
     background-color: var(--bs-secondary-bg);
+  }
+
+  .blog-caption {
+    @extend .blog-text;
+    text-align: left;
+    font-size: 12pt;
   }
 }

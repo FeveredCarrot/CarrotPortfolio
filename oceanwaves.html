@@ -49,13 +49,12 @@
         <div class="row">
             <div class="col"></div>
             <div class="blog-center-col">
-                <p class="blog-text">As part of a larger game project (that I never finished), I set out to create a
-                    detailed, flexible, and performant ocean simulation closely following the techniques outlined by
-                    Acerola and Jump Trajectory in their videos on the subject. I also made extensive use of the
-                    research papers referenced in those videos - mainly "Simulating Ocean Water" by Jerry Tessendorf and
-                    "Realtime GPGPU FFT
-                    Ocean Water Simulation" by Fynn-Jorin Flügge. Although I never finished the rest of the game, I
-                    consider the ocean simulation itself to be my proudest achievement as a programmer.</p>
+                <p class="blog-text">In late 2023, I began working on a personal game project based around traversing
+                    the ocean. Since the ocean simulation was going to be a main focus of the game, it needed to be both
+                    flexible enough to dynamically control the ocean state and detailed enough to represent a wide
+                    variety of weather conditions - all while being performant enough to run in real-time. Although I
+                    never finished the rest of the game, I consider the ocean simulation itself to be my proudest
+                    achievement as a programmer.</p>
             </div>
             <div class="col"></div>
         </div>
@@ -63,12 +62,42 @@
             <div class="col">
             </div>
             <div class="blog-center-col">
-                <p class="blog-text">My initial idea was to use many Gerstner waves (circular waves) layered together
-                    to generate an animated displacement map of the ocean surface. However, using the CPU to generate
-                    enough waves for a sufficiently detailed ocean is far too expensive. Luckily, I discovered a much
-                    more robust technique using a GPU implementation of the magical fast Fourier transform (FFT)
-                    algorithm to generate the displacement map from a frequency domain representation of the ocean's
-                    waves.</p>
+                <p class="blog-text">Initially, I tried using a few layered Gerstner waves (waves with both vertical and
+                    horizontal displacement) to simulate the ocean, but the results were lackluster. The combined result
+                    was not very detailed, and since I was simulating the waves on the CPU, I could only add so many
+                    waves before performance started to degrade.
+                </p>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="blog-center-col">
+                <figure>
+                    <video autoplay class="img-fluid" loop muted>
+                        <source src="videos/GerstnerWaves.mp4">
+                    </video>
+                    <figcaption class="blog-caption">Initial trials layering 4 CPU based Gerstner waves.</figcaption>
+                </figure>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="blog-center-col">
+                <p class="blog-text">Luckily, I came across two videos by <a
+                        href="https://youtu.be/yPfagLeUa7k">Acerola</a> and
+                    <a href="https://youtu.be/kGEqaX4Y4bQ">Jump Trajectory</a> which describe a technique based on the
+                    fast Fourier transform (FFT) algorithm that can simulate many thousands of waves in parallel on the
+                    GPU. There's a good amount of math involved, but basically, we take advantage of the
+                    inverse Fourier transform's ability to convert a set of wave frequencies into actual waves.
+                    This means that if we can find out the overall distribution of wave frequencies in the ocean,
+                    we can convert that into an accurate representation of the ocean. Lucky again, there are already
+                    formulas available that can give us an oceanographic spectrum from a set of parameters like wind
+                    speed, wind direction, ocean depth, etc.
+                </p>
             </div>
             <div class="col"></div>
         </div>
@@ -81,33 +110,32 @@
                     direction is the direction from the center, and a complex amplitude is stored in the red and green
                     channels of each pixel. The red and green channels are also multiplied by random gaussian
                     distributed noise to create a natural distribution of wave phase and amplitude. There's also another
-                    step that involves generating an additional complex conjugate version of the frequency spectrum but
+                    step that involves generating an additional complex conjugate version of the frequency spectrum, but
                     I won't get too much into that.</p>
             </div>
-            <div class="blog-double-column">
+            <div class="blog-double-column align-content-center">
                 <figure><img alt="images/MediaObj_Placeholder.png" class="img-fluid" src="images/SpectrumPreview.png">
-                    <figcaption class="text-light">Wave frequency spectrum texture.</figcaption>
+                    <figcaption class="blog-caption">Wave frequency spectrum texture.</figcaption>
                 </figure>
             </div>
             <div class="col"></div>
         </div>
         <div class="row">
             <div class="col"></div>
-            <div class="blog-double-column">
+            <div class="blog-double-column ">
                 <p class="blog-text">After generating the frequency domain of the initial ocean state, we advance the
                     frequencies forward in time by using Euler's formula (and some other math) to rotate each pixel
                     around the complex plane. The resulting fourier components texture can be run through an inverse FFT
-                    (IFFT)
-                    to become the heightmap of the ocean at the specified time, but before we do that, we can derive
-                    additional fourier components textures for the horizontal displacements of the Gerstner waves and
-                    for the slope on each axis (for normal mapping) using a few complex multiplications.</p>
+                    (IFFT) to become the heightmap of the ocean at the specified time, but before we do that, we can
+                    derive additional fourier components textures for the horizontal displacements of the Gerstner waves
+                    and for the slope on each axis (for normal mapping) using a few complex multiplications.</p>
             </div>
-            <div class="blog-double-column">
+            <div class="blog-double-column align-content-center">
                 <figure>
                     <video autoplay class="img-fluid" loop muted>
                         <source src="videos/FourierComponentsPreview.mp4">
                     </video>
-                    <figcaption class="text-light">Fourier components texture animating through time.</figcaption>
+                    <figcaption class="blog-caption">Fourier components texture animating through time.</figcaption>
                 </figure>
             </div>
             <div class="col"></div>
@@ -118,17 +146,11 @@
                 <p class="blog-text">Finally, we run each fourier components texture through a 2D inverse FFT
                     algorithm on the GPU to generate the X, Y, and Z displacements along with derivative maps to be used
                     as fragment normals. I implemented the inverse FFT using a compute shader version of the
-                    Cooley-Tukey FFT algorithm as described by Fynn-Jorin Flügge in their thesis paper. This involves
+                    Cooley-Tukey FFT algorithm as described by Fynn-Jorin Flügge in his <a
+                            href="https://doi.org/10.15480/882.1436">thesis paper.</a> This involves
                     pre-computing a "butterfly texture" that contains the "twiddle factors" for each stage of the divide
                     and conquer algorithm. The butterfly texture is then used in another compute shader for a horizontal
-                    and vertical IFFT
-                    pass on the fourier components texture. I still haven't wrapped my head around how the entire thing
-                    works; I
-                    honestly consider it to be as close as you can get to real magic because the result of the IFFT is a
-                    highly
-                    detailed displacement and slope map of the ocean that tiles seamlessly, animates realistically, and
-                    runs smoothly. Profiling it on my machine, it takes about 5ms each frame, and I know theres probably
-                    a lot of ways I could optimize it further.
+                    and vertical IFFT pass on the fourier components texture.
                 </p>
             </div>
 
@@ -138,7 +160,7 @@
             <div class="col-xl-2 align-content-center">
                 <figure>
                     <img alt="images/MediaObj_Placeholder.png" class="img-fluid" src="images/ButterfyPreview.png">
-                    <figcaption class="text-light">Butterfly texture.</figcaption>
+                    <figcaption class="blog-caption">Butterfly texture.</figcaption>
                 </figure>
             </div>
             <div class="blog-double-column">
@@ -146,7 +168,7 @@
                     <video autoplay class="img-fluid" loop muted>
                         <source src="videos/DisplacementPreview.mp4">
                     </video>
-                    <figcaption class="text-light">Final displacement map. RGB channels correspond to XYZ
+                    <figcaption class="blog-caption">Final displacement map. RGB channels correspond to XYZ
                         displacement.
                     </figcaption>
                 </figure>
@@ -156,8 +178,20 @@
                     <video autoplay class="img-fluid" loop muted>
                         <source src="videos/SlopePreview.mp4">
                     </video>
-                    <figcaption class="text-light">Slope map used for fragment shader normals.</figcaption>
+                    <figcaption class="blog-caption">Slope map used for fragment shader normals.</figcaption>
                 </figure>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="blog-center-col">
+                <p class="blog-text">Even after spending weeks on this project, I still haven't fully wrapped my head
+                    around how the entire thing works; I honestly consider it to be as close as you can get to real
+                    magic because the result of the IFFT is a highly detailed displacement and slope map of the ocean
+                    that tiles seamlessly, animates realistically, and runs fast. Profiling it on my machine, it takes
+                    about 5ms each frame, and I know there's probably a lot of ways I could optimize it further.
+                </p>
             </div>
             <div class="col"></div>
         </div>
