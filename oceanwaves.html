@@ -191,8 +191,8 @@
                     around how the entire thing works; I honestly consider it to be as close as you can get to real
                     magic because the result of the IFFT is a highly detailed displacement and slope map of the ocean
                     that animates realistically and tiles seamlessly. Profiling it on my machine, the compute shaders
-                    take
-                    about 5ms total each frame, and I know with my sloppy implementation there's surely room to optimize
+                    take about 5ms total each frame, and I know with my sloppy implementation there's surely room to
+                    optimize
                     it further.
                 </p>
             </div>
@@ -201,13 +201,16 @@
         <div class="row">
             <div class="col"></div>
             <div class="blog-center-col">
-                <p class="blog-text">I haven't mentioned that I'm using the anti-tiling technique described in the
+                <p class="blog-text">There is still one glaring issue with this solution: tiling.
+                    I haven't mentioned that I'm using the anti-tiling technique described in the
                     Acerola and Jump Trajectory videos where we split the frequncy domain into multiple cascades for the
                     low, medium, and high frequency waves. The inverse FFT is performed for each of the frequency
                     cascades so that we can layer each displacement map on top of each other at different scales. The
                     effect of this is that the large waves tile over much a larger area, and the smaller waves that tile
-                    more frequently are latered on top. Even with three cascades, the effect of tiling is almost
-                    eliminated while the fine details are preserved.
+                    more frequently are layered on top. Even with three cascades, the effect of tiling is almost
+                    eliminated while the fine details are preserved, and since the FFT is so fast, we can afford to
+                    triple
+                    the number of FFTs computed each frame.
                 </p>
             </div>
             <div class="col"></div>
