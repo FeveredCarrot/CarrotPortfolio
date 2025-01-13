@@ -1,54 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-bs-theme="dark" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Ocean Wave Simulation</title>
-    <link href="css/bootstrap-4.4.1.css" rel="stylesheet" type="text/css">
-    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="css/custom.css" rel="stylesheet">
 </head>
-<body style="background: #26242F">
+<body>
 
 <div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <button aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
-                data-target="#navbarSupportedContent1" data-toggle="collapse" type="button"><span
-                class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent1">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active"><a class="nav-link" href="/portfolio/">Home <span
-                        class="sr-only">(current)</span></a></li>
-                <li class="nav-item"><a class="nav-link" href="https://itch.io/profile/carrotcakevr">Itch.io</a></li>
-                <li class="nav-item"><a class="nav-link" href="https://github.com/FeveredCarrot">Github</a></li>
-                <li class="nav-item"><a class="nav-link" href="mailto:jaspermclean10@gmail.com">Contact</a></li>
-                <li class="nav-item dropdown"><a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
-                                                 data-toggle="dropdown" href="#" id="navbarDropdown1"
-                                                 role="button"> Projects&nbsp; </a>
-                    <div aria-labelledby="navbarDropdown1" class="dropdown-menu"><a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a></div>
-                </li>
-                <li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
-            </ul>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler" data-bs-target="#navbarSupportedContent"
+                    data-bs-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a aria-current="page" class="nav-link active" href="/index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://itch.io/profile/carrotcakevr">Itch.io</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/FeveredCarrot">Github</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="mailto:jaspermclean10@gmail.com">Contact</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
-    <div class="container container-main">
+    <div class="container">
         <h1 class="title display-4 text-center p-3">Ocean Wave Simulation</h1>
         <div class="row">
-            <div class="col-3"></div>
-            <div class="col-lg-6">
-                <video autoplay class="embed-responsive" loop muted style="margin-bottom: 1rem">
+            <div class="col"></div>
+            <div class="col-xl-12 justify-content-center">
+                <video autoplay class="img-fluid m-3" loop muted>
                     <source src="videos/WavesPreview.mp4">
                 </video>
             </div>
-            <div class="col-3"></div>
+            <div class="col"></div>
         </div>
         <div class="row">
-            <div class="col-3"></div>
-            <div class="col-lg-6">
-                <p class="text-justify">As part of a larger game project (that I never finished), I set out to create a
+            <div class="col"></div>
+            <div class="blog-center-col">
+                <p class="blog-text">As part of a larger game project (that I never finished), I set out to create a
                     detailed, flexible, and performant ocean simulation closely following the techniques outlined by
                     Acerola and Jump Trajectory in their videos on the subject. I also made extensive use of the
                     research papers referenced in those videos - mainly "Simulating Ocean Water" by Jerry Tessendorf and
@@ -56,25 +57,25 @@
                     Ocean Water Simulation" by Fynn-Jorin Flügge. Although I never finished the rest of the game, I
                     consider the ocean simulation itself to be my proudest achievement as a programmer.</p>
             </div>
-            <div class="col-3"></div>
+            <div class="col"></div>
         </div>
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col">
             </div>
-            <div class="col-lg-6">
-                <p class="text-justify">My initial idea was to use many Gerstner waves (circular waves) layered together
+            <div class="blog-center-col">
+                <p class="blog-text">My initial idea was to use many Gerstner waves (circular waves) layered together
                     to generate an animated displacement map of the ocean surface. However, using the CPU to generate
                     enough waves for a sufficiently detailed ocean is far too expensive. Luckily, I discovered a much
                     more robust technique using a GPU implementation of the magical fast Fourier transform (FFT)
                     algorithm to generate the displacement map from a frequency domain representation of the ocean's
                     waves.</p>
             </div>
-            <div class="col-lg-3"></div>
+            <div class="col"></div>
         </div>
         <div class="row">
-            <div class="col-xl-3"></div>
-            <div class="col-xl-6">
-                <p class="text-justify">I used the JONSWAP ocean wave spectrum function and a Cosine-2s directional
+            <div class="col"></div>
+            <div class="blog-double-column">
+                <p class="blog-text">I used the JONSWAP ocean wave spectrum function and a Cosine-2s directional
                     spreading function to generate the frequency domain representation of the initial ocean state. The
                     result is a texture where wave frequency is represented as the distance from the center, wave
                     direction is the direction from the center, and a complex amplitude is stored in the red and green
@@ -83,71 +84,66 @@
                     step that involves generating an additional complex conjugate version of the frequency spectrum but
                     I won't get too much into that.</p>
             </div>
-            <div class="col-xl-3"></div>
-        </div>
-        <div class="row">
-            <div class="col-xl-3">
-
-            </div>
-            <div class="col-xl-6">
-                <figure><img class="img-fluid" src="images/SpectrumPreview.png" alt="images/MediaObj_Placeholder.png">
+            <div class="blog-double-column">
+                <figure><img alt="images/MediaObj_Placeholder.png" class="img-fluid" src="images/SpectrumPreview.png">
                     <figcaption class="text-light">Wave frequency spectrum texture.</figcaption>
                 </figure>
             </div>
-            <div class="col-xl-3"></div>
+            <div class="col"></div>
         </div>
         <div class="row">
-            <div class="col-xl-3"></div>
-            <div class="col-xl-6">
-                <p class="text-justify">After generating the frequency domain of the initial ocean state, we advance the
+            <div class="col"></div>
+            <div class="blog-double-column">
+                <p class="blog-text">After generating the frequency domain of the initial ocean state, we advance the
                     frequencies forward in time by using Euler's formula (and some other math) to rotate each pixel
                     around the complex plane. The resulting fourier components texture can be run through an inverse FFT
+                    (IFFT)
                     to become the heightmap of the ocean at the specified time, but before we do that, we can derive
                     additional fourier components textures for the horizontal displacements of the Gerstner waves and
                     for the slope on each axis (for normal mapping) using a few complex multiplications.</p>
             </div>
-            <div class="col-xl-3"></div>
-        </div>
-        <div class="row">
-            <div class="col-xl-3"></div>
-            <div class="col-xl-6">
+            <div class="blog-double-column">
                 <figure>
-                    <video autoplay class="embed-responsive" loop muted>
+                    <video autoplay class="img-fluid" loop muted>
                         <source src="videos/FourierComponentsPreview.mp4">
                     </video>
                     <figcaption class="text-light">Fourier components texture animating through time.</figcaption>
                 </figure>
             </div>
-            <div class="col-xl-3"></div>
+            <div class="col"></div>
         </div>
         <div class="row">
-            <div class="col-xl-3"></div>
-            <div class="col-xl-6">
-                <p class="text-justify">Finally, we run each fourier components texture through a 2D inverse FFT
+            <div class="col"></div>
+            <div class="blog-center-col">
+                <p class="blog-text">Finally, we run each fourier components texture through a 2D inverse FFT
                     algorithm on the GPU to generate the X, Y, and Z displacements along with derivative maps to be used
                     as fragment normals. I implemented the inverse FFT using a compute shader version of the
                     Cooley-Tukey FFT algorithm as described by Fynn-Jorin Flügge in their thesis paper. This involves
-                    precomputing a "butterfly texture" that contains the "twiddle factors" for each stage of the divide
-                    and conquer algorithm, which is then used to compute the inverse FFT for a horizontal and vertical
-                    pass on the components texture. I'm not going to pretend like I know exactly how it all works, I
-                    honestly consider it to be real life magic because the result of the inverse FFT is a highly
+                    pre-computing a "butterfly texture" that contains the "twiddle factors" for each stage of the divide
+                    and conquer algorithm. The butterfly texture is then used in another compute shader for a horizontal
+                    and vertical IFFT
+                    pass on the fourier components texture. I still haven't wrapped my head around how the entire thing
+                    works; I
+                    honestly consider it to be as close as you can get to real magic because the result of the IFFT is a
+                    highly
                     detailed displacement and slope map of the ocean that tiles seamlessly, animates realistically, and
                     runs smoothly. Profiling it on my machine, it takes about 5ms each frame, and I know theres probably
                     a lot of ways I could optimize it further.
                 </p>
             </div>
-            <div class="col-xl-3">
-                <figure><img class="img-fluid" src="images/ButterfyPreview.png" alt="images/MediaObj_Placeholder.png">
+
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col-xl-2 align-content-center">
+                <figure>
+                    <img alt="images/MediaObj_Placeholder.png" class="img-fluid" src="images/ButterfyPreview.png">
                     <figcaption class="text-light">Butterfly texture.</figcaption>
                 </figure>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xl-3">
-            </div>
-            <div class="col-xl-6">
+            <div class="blog-double-column">
                 <figure>
-                    <video autoplay class="embed-responsive" loop muted>
+                    <video autoplay class="img-fluid" loop muted>
                         <source src="videos/DisplacementPreview.mp4">
                     </video>
                     <figcaption class="text-light">Final displacement map. RGB channels correspond to XYZ
@@ -155,19 +151,20 @@
                     </figcaption>
                 </figure>
             </div>
-            <div class="col-xl-3">
+            <div class="blog-double-column">
                 <figure>
-                    <video autoplay class="embed-responsive" loop muted>
+                    <video autoplay class="img-fluid" loop muted>
                         <source src="videos/SlopePreview.mp4">
                     </video>
                     <figcaption class="text-light">Slope map used for fragment shader normals.</figcaption>
                 </figure>
             </div>
+            <div class="col"></div>
         </div>
         <div class="row">
-            <div class="col-xl-3"></div>
-            <div class="col-xl-6">
-                <p class="text-justify">I haven't mentioned that I'm using the anti-tiling technique described in the
+            <div class="col"></div>
+            <div class="blog-center-col">
+                <p class="blog-text">I haven't mentioned that I'm using the anti-tiling technique described in the
                     Acerola and Jump Trajectory videos where we split the frequncy domain into multiple cascades for the
                     low, medium, and high frequency waves. The inverse FFT is performed for each of the frequency
                     cascades so that we can layer each displacement map on top of each other at different scales. The
@@ -176,15 +173,11 @@
                     eliminated while the fine details are preserved.
                 </p>
             </div>
-            <div class="col-xl-3"></div>
+            <div class="col"></div>
         </div>
     </div>
 </div>
-    <footer class="footer-pad"></footer>
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap-4.4.1.js"></script>
-
-
+<footer class="footer-pad"></footer>
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

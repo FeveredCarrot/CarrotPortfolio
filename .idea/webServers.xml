@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="95c4c1ae-417f-40c0-8047-6d1d3de9d9da" name="hulzberk.com" url="https://hulzberk.com">
+      <webServer id="95c4c1ae-417f-40c0-8047-6d1d3de9d9da" name="hulzberk.com" url="">
         <fileTransfer rootFolder="/var/www/hulzberk" accessType="SFTP" host="hulzberk.com" port="22" sshConfigId="d457ee09-3918-4b4b-bd54-7f3f38f85159" sshConfig="root@hulzberk.com:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
