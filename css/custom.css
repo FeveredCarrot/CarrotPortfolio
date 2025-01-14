@@ -13092,7 +13092,6 @@ textarea.form-control-lg {
         display: none !important;
     }
 }
-
 .blog-text, [data-bs-theme=dark] .blog-caption {
   font-family: var(--bs-body-font-family), sans-serif;
   font-weight: var(--bs-body-font-weight);
@@ -13122,7 +13121,6 @@ textarea.form-control-lg {
     --bs-card-bg: var(--bs-tertiary-bg);
     background-color: var(--bs-secondary-bg);
 }
-
 [data-bs-theme=dark] .blog-caption {
   text-align: left;
   font-size: 12pt;

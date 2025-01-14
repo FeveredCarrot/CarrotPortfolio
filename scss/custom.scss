@@ -49,7 +49,7 @@ $primary-text-emphasis-dark: lighten($primary, 35%);
 }
 
 .title {
-  //margin-top: 1rem;
+  //font-variant: all-petite-caps;
 }
 
 @include color-mode(dark) {

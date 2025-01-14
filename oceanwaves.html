@@ -143,15 +143,14 @@
         <div class="row">
             <div class="col"></div>
             <div class="blog-center-col">
-                <p class="blog-text">Finally, we run each fourier components texture through a 2D inverse FFT
+                <p class="blog-text">Finally, we run each fourier components texture through a 2D IFFT
                     algorithm on the GPU to generate the X, Y, and Z displacements along with derivative maps to be used
-                    as fragment normals. I implemented the inverse FFT using a compute shader version of the
+                    as fragment normals. I implemented the IFFT using a compute shader version of the
                     Cooley-Tukey FFT algorithm as described by Fynn-Jorin Flügge in his <a
                             href="https://doi.org/10.15480/882.1436">thesis paper.</a> This involves
                     pre-computing a "butterfly texture" that contains the "twiddle factors" for each stage of the divide
                     and conquer algorithm. The butterfly texture is then used in another compute shader for the
-                    horizontal
-                    and vertical IFFT pass on the fourier components textures.
+                    horizontal and vertical IFFT pass on the fourier components textures.
                 </p>
             </div>
             <div class="col"></div>
