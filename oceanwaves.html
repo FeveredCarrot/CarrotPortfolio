@@ -114,7 +114,7 @@
                     I won't get too much into that.</p>
             </div>
             <div class="blog-double-column align-content-center">
-                <figure><img alt="images/MediaObj_Placeholder.png" class="img-fluid" src="images/SpectrumPreview.png">
+                <figure><img alt="images/MediaObj_Placeholder.png" class="img-fluid" src="images/SpectrumPreview.jpg">
                     <figcaption class="blog-caption">Wave frequency spectrum texture.</figcaption>
                 </figure>
             </div>
@@ -154,14 +154,13 @@
                     and vertical IFFT pass on the fourier components textures.
                 </p>
             </div>
-
             <div class="col"></div>
         </div>
         <div class="row">
             <div class="col-xl-2 align-content-center">
                 <figure>
                     <img alt="images/MediaObj_Placeholder.png" class="img-fluid" src="images/ButterfyPreview.png">
-                    <figcaption class="blog-caption">Butterfly texture.</figcaption>
+                    <figcaption class="blog-caption">Butterfly texture (8x256).</figcaption>
                 </figure>
             </div>
             <div class="blog-double-column">
@@ -187,31 +186,34 @@
         <div class="row">
             <div class="col"></div>
             <div class="blog-center-col">
-                <p class="blog-text">Even after spending weeks on this project, I still haven't fully wrapped my head
-                    around how the entire thing works; I honestly consider it to be as close as you can get to real
-                    magic because the result of the IFFT is a highly detailed displacement and slope map of the ocean
-                    that animates realistically and tiles seamlessly. Profiling it on my machine, the compute shaders
-                    take about 5ms total each frame, and I know with my sloppy implementation there's surely room to
-                    optimize
-                    it further.
+                <p class="blog-text">There is still one glaring issue with this solution: tiling. If the grid length is
+                    set too small, the waves will prominently tile.
+                    Of course, we could simply set the grid length to cover a massive area, but the smaller details are
+                    lost unless we crank up the texture resolution as well.
+                    Instead, I used the same technique as in the Acerola and Jump Trajectory videos where we split the
+                    frequency domain into multiple cascades for the low, medium, and high frequency waves.
+                    The inverse FFT is performed for each of the frequency cascades so that we can layer each
+                    displacement
+                    map on top of each other at different scales. The effect of this is that the large waves tile over a
+                    much larger area, and the smaller waves that tile more frequently are layered on top. Even with only
+                    three cascades, the effect of tiling is almost eliminated while the fine details are preserved, and
+                    since the FFT is so fast, we can afford to triple the number of FFTs computed each frame as long as
+                    the texture resolution is kept at a reasonable level.
                 </p>
             </div>
             <div class="col"></div>
         </div>
         <div class="row">
-            <div class="col"></div>
+            <div class="col">
+            </div>
             <div class="blog-center-col">
-                <p class="blog-text">There is still one glaring issue with this solution: tiling.
-                    I haven't mentioned that I'm using the anti-tiling technique described in the
-                    Acerola and Jump Trajectory videos where we split the frequncy domain into multiple cascades for the
-                    low, medium, and high frequency waves. The inverse FFT is performed for each of the frequency
-                    cascades so that we can layer each displacement map on top of each other at different scales. The
-                    effect of this is that the large waves tile over much a larger area, and the smaller waves that tile
-                    more frequently are layered on top. Even with three cascades, the effect of tiling is almost
-                    eliminated while the fine details are preserved, and since the FFT is so fast, we can afford to
-                    triple
-                    the number of FFTs computed each frame.
-                </p>
+                <figure>
+                    <video autoplay class="img-fluid" loop muted>
+                        <source src="videos/CascadesPreview.mp4">
+                    </video>
+                    <figcaption class="blog-caption">Cascading frequency bands layered at differing grid scales.
+                    </figcaption>
+                </figure>
             </div>
             <div class="col"></div>
         </div>
