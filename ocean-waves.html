@@ -109,9 +109,7 @@
                     result is a texture where wave frequency is represented as the distance from the center, wave
                     direction is the direction from the center, and a complex amplitude is stored in the red and green
                     channels of each pixel. The red and green channels are also multiplied by random gaussian
-                    distributed noise to create a natural distribution of wave phase and amplitude. There's another
-                    step that involves generating an additional complex conjugate version of the frequency spectrum, but
-                    I won't get too much into that.</p>
+                    distributed noise to create a natural distribution of wave phase and amplitude.</p>
             </div>
             <div class="blog-double-column align-content-center">
                 <figure><img alt="images/MediaObj_Placeholder.png" class="img-fluid" src="images/SpectrumPreview.jpg">
@@ -128,7 +126,8 @@
                     around the complex plane. The resulting Fourier components texture can be run through an inverse FFT
                     (IFFT) to become the heightmap of the ocean at the specified time, but before we do that, we can
                     derive additional Fourier components textures for the horizontal displacements of the Gerstner waves
-                    and for the slope on each axis (for normal mapping) using a few complex multiplications.</p>
+                    and for the slope on each axis (for normal mapping) using a few complex multiplications of the
+                    original fourier components.</p>
             </div>
             <div class="blog-double-column align-content-center">
                 <figure>
@@ -150,7 +149,7 @@
                             href="https://doi.org/10.15480/882.1436">thesis paper.</a> This involves
                     pre-computing a "butterfly texture" that contains the "twiddle factors" for each stage of the divide
                     and conquer algorithm. The butterfly texture is then used in another compute shader for the
-                    horizontal and vertical IFFT pass on the fourier components textures.
+                    horizontal and vertical IFFT passes on each of the fourier components textures.
                 </p>
             </div>
             <div class="col"></div>
