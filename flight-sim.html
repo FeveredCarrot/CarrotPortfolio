@@ -175,8 +175,12 @@
                 </p>
             </div>
             <div class="blog-double-column">
-                <img alt="images/MediaObj_Placeholder.png" class="img-fluid p-3"
-                     src="images/CoefficientCurvePreview.png">
+                <figure class="figure">
+                    <img alt="images/MediaObj_Placeholder.png" class="img-fluid"
+                         src="images/CoefficientCurvePreview.png">
+                    <figcaption class="blog-caption">Lift coefficient curve. X-axis is angle of attack.</figcaption>
+                </figure>
+
             </div>
             <div class="col"></div>
         </div>
@@ -198,9 +202,11 @@
             <div class="blog-center-col">
                 <p class="blog-text">
                     In the video, Jump Trajectory also describes a method of
-                    dynamically calculating the coefficients of lift and drag for a wing surface, but it only works for
-                    rectangular wings in the subsonic regime. Instead, I created the lift/drag coefficient curves
-                    manually and stored them each as a Unity <code>AnimationCurve</code>.
+                    dynamically calculating the coefficients of lift and drag for a wing surface, but the formulae used
+                    are only valid for rectangular wings in the subsonic regime. Instead, I created the lift/drag
+                    coefficient curves
+                    manually and stored them each as a Unity <code>AnimationCurve</code> in a
+                    <code>ScriptableObject</code>.
                     I based the shape of the coefficient curves on whatever publicly available data I could find on the
                     aircraft, but in the future, I'd like to try finding a solution that is less
                     reliant on test flight/CFD simulation data.
@@ -208,11 +214,78 @@
             </div>
             <div class="col"></div>
         </div>
+        <div class="row justify-content-center">
+            <div class="col"></div>
+            <div class="blog-center-col">
+                <figure class="figure">
+                    <img alt="images/MediaObj_Placeholder.png" class="img-fluid"
+                         src="images/WingPreview.png">
+                    <figcaption class="blog-caption">Wing shape editor.</figcaption>
+                </figure>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="blog-center-col">
+                <p class="blog-text">
+                    The wing area is calculated from the position and chord (length) of the base and tip of the wing.
+                    The forces are applied to the wing's aerodynamic center, and the effective angle of attack is
+                    optionally
+                    modified depending on the amount of flap deflection. This behavior is not entirely realistic,
+                    but it works well enough for the purposes of the game. When each wing surface is put together on the
+                    aircraft, the result is that it flies semi-realistically.
+                </p>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="blog-double-column">
+                <p class="blog-text">
+                    I also wanted the game to be multiplayer, so I used the Photon Fusion 2.0 networking library to
+                    synchronize
+                    the game state between a host and multiple clients. The Fusion SDK has some convenient features,
+                    such
+                    as a networked transform component and a lag compensation system. However, the provided network
+                    transform
+                    component was not a good solution for synchronizing projectiles across the network. When the plane
+                    shoots,
+                    hundreds of bullets can be instantiated each second, and if the server has to update position data
+                    of
+                    thousands of projectiles per tick, it quickly eats up all the network bandwidth. To fix this issue,
+                    I
+                    created a custom data structure that holds the initial position, velocity, and time of the
+                    projectile.
+                    This is the only data sent over the network; the position of the projectile each tick is
+                    extrapolated
+                    from pre-calculated tables of the distance over time for each initial velocity.
+                </p>
+            </div>
+            <div class="blog-double-column p-3">
+                <figure class="figure">
+                    <img alt="images/MediaObj_Placeholder.png" class="img-fluid"
+                         src="images/BallisticsPreview.png">
+                    <figcaption class="blog-caption">Pre-computed distance/time tables.</figcaption>
+                </figure>
+
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="blog-center-col">
+                <figure class="figure">
+                    <img alt="images/MediaObj_Placeholder.png" class="img-fluid"
+                         src="images/NetworkProjectilePreview.png">
+                    <figcaption class="blog-caption">Network Projectile data structure.</figcaption>
+                </figure>
+            </div>
+            <div class="col"></div>
+        </div>
     </div>
-
-
 </div>
-<footer class="footer-pad"></footer>
+<footer class="footer-pad m-5"></footer>
 <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
