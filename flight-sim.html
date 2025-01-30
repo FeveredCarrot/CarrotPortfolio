@@ -53,7 +53,7 @@
                     pricing
                     model and uninspired gameplay, I decided to try my hand at making my own flight simulator game. I'm
                     still far
-                    from finished, but I think what I have so far is worthy of sharing regardless.
+                    from finished, but I consider what I have so far to be worthy of sharing regardless.
                 </p>
             </div>
             <div class="col"></div>
@@ -64,27 +64,11 @@
                 <p class="blog-text">
                     My initial goal for the game was to make a generalized flight model that behaves realistically while
                     being simple
-                    enough to quickly tune to many different airframes. I ended up using aspects from a technique I
+                    enough to quickly tune to many different airframes. I ended up implementing parts of a technique I
                     found in a video by
-                    <a href="https://youtu.be/p3jDJ9FtTyM">Jump Trajectory</a> that simulates the forces acting on each
-                    lifting
-                    surface of the aircraft individually. In the video, Jump Trajectory also describes a method of
-                    dynamically
-                    calculating the coefficients of lift and drag for a wing surface, but I found that it was easier to
-                    create the lift/drag coefficient curves by hand and storing them as a Unity
-                    <code>AnimationCurve</code>.
-                    I based the shape of the coefficient curves on whatever publicly available data I could find on the
-                    aircraft.
-                    In the future, I'd like to do more research on other techniques
-                </p>
-            </div>
-            <div class="col"></div>
-        </div>
-        <div class="row">
-            <div class="col"></div>
-            <div class="blog-center-col">
-                <p class="blog-text">
-                    The lift and drag calculations are based on the equations for coefficients of lift and drag.
+                    <a href="https://youtu.be/p3jDJ9FtTyM">Jump Trajectory</a>. Basically, each wing surface calculates
+                    lift and drag forces using these equations:
+
                 </p>
             </div>
             <div class="col"></div>
@@ -137,13 +121,96 @@
         </div>
         <div class="row">
             <div class="col"></div>
+            <div class="blog-double-column align-content-center">
+                <p class="blog-text">
+                    Where:
+                </p>
+                <p class="blog-text">
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <mi>L</mi>
+                    </math>
+                    = lift
+                </p>
+                <p class="blog-text">
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <mi>D</mi>
+                    </math>
+                    = drag,
+                </p>
+                <p class="blog-text">
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <mi>p</mi>
+                    </math>
+                    = air density
+                </p>
+                <p class="blog-text">
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <mi>v</mi>
+                    </math>
+                    = air velocity (relative to wing)
+                </p>
+                <p class="blog-text">
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <msub>
+                            <mi>C</mi>
+                            <mi>L</mi>
+                        </msub>
+                    </math>
+                    = coefficient of lift
+                </p>
+                <p class="blog-text">
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <msub>
+                            <mi>C</mi>
+                            <mi>L</mi>
+                        </msub>
+                    </math>
+                    = coefficient of drag
+                </p>
+                <p class="blog-text">
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <mi>S</mi>
+                    </math>
+                    = wing surface area
+                </p>
+            </div>
+            <div class="blog-double-column">
+                <img alt="images/MediaObj_Placeholder.png" class="img-fluid p-3"
+                     src="images/CoefficientCurvePreview.png">
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
             <div class="blog-center-col">
-                <p class="blog-text text-xl-center">
+                <p class="blog-text">
+                    The coefficients of lift and drag are what distinguishes the characteristics of wing surfaces from
+                    each other.
+                    Angle of attack (the angle between the wing direction and airflow direction) is the main parameter
+                    that goes into calculating the coefficients. Generally, as angle of attack increases,
+                    lift and drag will also increase until the wing begins to stall and rapidly lose lift.
+                </p>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="blog-center-col">
+                <p class="blog-text">
+                    In the video, Jump Trajectory also describes a method of
+                    dynamically calculating the coefficients of lift and drag for a wing surface, but it only works for
+                    rectangular wings in the subsonic regime. Instead, I created the lift/drag coefficient curves
+                    manually and stored them each as a Unity <code>AnimationCurve</code>.
+                    I based the shape of the coefficient curves on whatever publicly available data I could find on the
+                    aircraft, but in the future, I'd like to try finding a solution that is less
+                    reliant on test flight/CFD simulation data.
                 </p>
             </div>
             <div class="col"></div>
         </div>
     </div>
+
+
 </div>
 <footer class="footer-pad"></footer>
 <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
